@@ -1,0 +1,26 @@
+{% extends 'inventorymanage/base_detail.html' %}
+
+{% block detail %}
+    <div class="card" style="width: 18rem;">
+        <img src="{% if item.image %}{{ item.image.url }}{% endif %}" class="card-img-top" alt="이미지가 존재하지 않습니다">
+        <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.desc }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">가격 : {{ item.price }}</li>
+            <li class="list-group-item">수량 : {{ item.amount }}</li>
+            <li class="list-group-item">취급매장 : {{ item.shops }}</li>
+        </ul>
+        <div class="card-body">
+            <div class="d-flex justify-content-around">
+            <a href="{% url "inventorymanage:item_edit" item.pk %}" role="button" class="btn btn-primary">수정</a>
+            <form action="{% url "inventorymanage:item_delete" item.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">삭제</button>
+            </form>
+            <a href="{% url "inventorymanage:item_list" %}" role="button" class="btn btn-primary">목록</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

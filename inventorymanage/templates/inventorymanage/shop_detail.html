@@ -1,0 +1,24 @@
+{% extends 'inventorymanage/base_detail.html' %}
+
+{% block detail %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ shop.name }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">전화번호: {{ shop.tel }}</li>
+            <li class="list-group-item">주소 : {{ shop.address }}</li>
+            <li class="list-group-item">취급물품 : {% for item in shop.item.all %}{{ item }}{% endfor %}</li>
+        </ul>
+        <div class="card-body">
+            <div class="d-flex justify-content-around">
+            <a href="{% url "inventorymanage:shop_edit" shop.pk %}" role="button" class="btn btn-primary">수정</a>
+            <form action="{% url "inventorymanage:shop_delete" shop.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">삭제</button>
+            </form>
+            <a href="{% url "inventorymanage:shop_list" %}" role="button" class="btn btn-primary">목록</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

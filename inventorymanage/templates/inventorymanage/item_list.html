@@ -1,0 +1,33 @@
+{% extends 'inventorymanage/base_list.html' %}
+
+
+{% block list %}
+    <div class="row">
+        {% for item in item_list %}
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{% if item.image %}{{ item.image.url }}{% endif %}" class="card-img-top"
+                             alt="이미지가 존재하지 않습니다">
+                        <h5 class="card-title"><a
+                                href="{% url "inventorymanage:item_detail" item.pk %}">{{ item.name }}</a></h5>
+                        <h6 class="card-text">가격 : {{ item.price }}</h6>
+                        <div class = "d-flex justify-content-around">
+                            <button type="button" class="btn btn-outline-primary">
+                                현재수량 <span class="badge badge-light">{{ item.amount }}</span>
+                            </button>
+                            <form action="{% url "inventorymanage:item_amount_add" item.pk %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">재고추가</button>
+                            </form>
+                            <form action="{% url "inventorymanage:item_amount_sub" item.pk %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">재고빼기</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

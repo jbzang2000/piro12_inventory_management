@@ -1,0 +1,9 @@
+{% extends 'inventorymanage/base_create.html' %}
+
+{% block create %}
+    <h1>거래처등록</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">등록하기</button>
+    </form>
+{% endblock %}

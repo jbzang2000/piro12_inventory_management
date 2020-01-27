@@ -1,0 +1,18 @@
+{% extends 'inventorymanage/base_list.html' %}
+
+
+{% block list %}
+    <div class="row">
+        {% for shop in shop_list %}
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="{% url "inventorymanage:shop_detail" shop.pk %}">{{ shop.name }}</a></h4>
+                        <h6 class="card-text">{{ shop.tel }}</h6>
+                        <h6 class="card-text">{{ shop.address }}</h6>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
